@@ -66,13 +66,13 @@ public class BOJ_11048_이동하기 {
         }
 
         Queue<Pair> q = new LinkedList<>();
-        q.add(new Main.Pair(1,1));
+        q.add(new Pair(1,1));
 
         int[] dx = {1,0,1};
         int[] dy = {0,1,1};
         int[][] visited = new int[MAX][MAX];
         while(!q.isEmpty()){
-            Main.Pair cur = q.remove();
+            Pair cur = q.remove();
 
             // move  이동, 상태변경, 가능한 것들 큐에 추가
             for (int i = 0; i < 3; i++) {
@@ -86,7 +86,7 @@ public class BOJ_11048_이동하기 {
                 if (dp[nx][ny] < dp[cur.x][cur.y]+board[nx][ny]
                         || visited[nx][ny]==0){
                     dp[nx][ny] = max(dp[cur.x][cur.y]+board[nx][ny],dp[nx][ny]);
-                    q.add(new Main.Pair(nx,ny));
+                    q.add(new Pair(nx,ny));
                 }
             }
         }
