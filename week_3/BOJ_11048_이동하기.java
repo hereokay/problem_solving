@@ -65,7 +65,7 @@ public class BOJ_11048_이동하기 {
             }
         }
 
-        Queue<Main.Pair> q = new LinkedList<>();
+        Queue<Pair> q = new LinkedList<>();
         q.add(new Main.Pair(1,1));
 
         int[] dx = {1,0,1};
