@@ -10,7 +10,6 @@ import java.util.Queue;
 // 24444 알고리즘 수업 - 너비웃
 public class BOJ_24444_너비우선탐색1 {
 
-
     public void solution() throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 //        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
