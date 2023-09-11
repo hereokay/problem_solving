@@ -1,4 +1,4 @@
-package week_5_0911_0917;
+package jin.week_5_0911_0917;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -97,7 +97,7 @@ public class BOJ_4963_섬의개수 {
                 }
 
                 visited[nH][nW]=1;
-                queue.add(new Main.Pair(nH,nW));
+                queue.add(new Pair(nH,nW));
             }
         }
     }

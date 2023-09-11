@@ -1,8 +1,7 @@
-package week_1;
+package jin.week_1;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.*;
 
 
 public class BOJ_1003_피보나치함수 {

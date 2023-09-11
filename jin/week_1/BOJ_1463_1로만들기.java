@@ -1,7 +1,5 @@
-package week_1;
+package jin.week_1;
 import java.io.*;
-import java.lang.reflect.Parameter;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
