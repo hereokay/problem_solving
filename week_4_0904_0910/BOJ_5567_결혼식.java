@@ -1,7 +1,5 @@
 package week_4_0904_0910;
 
-import Main;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
