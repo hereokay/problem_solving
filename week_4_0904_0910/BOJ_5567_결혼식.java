@@ -1,5 +1,7 @@
 package week_4_0904_0910;
 
+import Main;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,10 +56,11 @@ public class BOJ_5567_결혼식 {
     static int cnt = 0;
     public static void bfs(int start,int[][] graph){
         visited[start]=1;
-        Queue<Main.Pair> queue = new LinkedList<>();
-        queue.add(new Main.Pair(start,0));
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(start,0));
         while(!queue.isEmpty()){
-            Main.Pair cur = queue.remove();
+
+            Pair cur = queue.remove();
             int x = cur.getA();
             int depth = cur.getB();
 
@@ -75,7 +78,7 @@ public class BOJ_5567_결혼식 {
 
                 visited[i]=1;
                 cnt+=1;
-                queue.add(new Main.Pair(i,depth+1));
+                queue.add(new Pair(i,depth+1));
             }
         }
     }
