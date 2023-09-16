@@ -1,4 +1,4 @@
-package jin.week_3;
+package week_3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
