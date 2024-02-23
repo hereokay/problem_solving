@@ -1,82 +1,110 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
 
     static class Node {
-        int height;
-        int inpIndex;
+        int to;
+        int wei;
 
-        public Node(int height, int inpIndex) {
-            this.height = height;
-            this.inpIndex = inpIndex;
+        public Node(int to, int wei) {
+            this.to = to;
+            this.wei = wei;
         }
     }
 
+    static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void main(String[] args) {
 
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
-        int n = Integer.parseInt(sc.nextLine());
 
-        ArrayList<String> candidateList = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            for (int j = 1; j <= 9; j++) {
-                for (int k = 1; k <= 9; k++) {
-                    if ( i== j || i == k || j == k){
+        int n = Integer.parseInt(sc.nextLine());
+        int[][] plays = new int[n][3];
+
+        for (int i = 0; i < n; i++) {
+            String[] inp = sc.nextLine().split(" ");
+            int num = Integer.parseInt(inp[0]);
+            int strike = Integer.parseInt(inp[1]);
+            int ball = Integer.parseInt(inp[2]);
+
+            plays[i] = new int[]{num, strike, ball};
+        }
+
+        // 시작
+//         // 시뮬레이션?
+        ArrayList<Integer> candi = new ArrayList<Integer>();
+        for(int i =1; i<= 9; i++){
+            for(int j =1; j<=9; j++){
+                for(int k =1; k<=9; k++){
+
+                    if(i==j || j==k || k==i){
                         continue;
                     }
 
-                    int value = i*100 + j*10 + k;
-                    candidateList.add(String.valueOf(value));
+                    int num = i*100+j*10+k;
+                    candi.add(num);
                 }
             }
         }
-        // 스트라이크 볼
-        for (int i = 0; i < n; i++) {
-            String[] s = sc.nextLine().split(" ");
-            String num = s[0];
-            int strike = Integer.parseInt(s[1]);
-            int ball = Integer.parseInt(s[2]);
 
-            removeCandidate(candidateList,num,strike,ball);
+
+        for(int[] play : plays){
+            int idx = 0;
+            while(true){
+                if(idx == candi.size()){
+                    break;
+                }
+                int num1 = play[0];
+                int strike = play[1];
+                int ball = play[2];
+
+                int num2 = candi.get(idx);
+
+                if(isRight(num1,num2,strike,ball)){
+                    idx++;
+                }
+                else{
+                    candi.remove(idx);
+                }
+            }
+
         }
-
-        System.out.println(candidateList.size());
+        System.out.println(candi.size());
     }
 
-    public static void removeCandidate(ArrayList<String> candidateList, String num, int strike, int ball){
-        // TODO 제거
+    public static boolean isRight(int num1, int num2, int strike, int ball){
+        int x1 = num1/100;
+        int x2 = (num1/10)%10;
+        int x3 = num1%10;
 
-        for (int i = 0; i < candidateList.size(); i++) {
-            String candidate = candidateList.get(i);
+        int y1 = num2/100;
+        int y2 = (num2/10)%10;
+        int y3 = num2%10;
 
-            int[] result = calResult(candidate, num);
-            if (!(result[0]==strike && result[1]==ball)){
-                candidateList.remove(candidate);
-                i--;
-            }
+        if(x1==y1){
+            strike--;
         }
-    }
-
-    public static int[] calResult(String one, String two){
-        int[] ints = new int[2];
-        
-        for (int i = 0; i < 3; i++) {
-            if (one.charAt(i) == two.charAt(i)){
-                ints[0]++;
-            }
+        if(x2==y2){
+            strike--;
+        }
+        if(x3==y3){
+            strike--;
         }
 
-        if (one.charAt(0)==two.charAt(1) || one.charAt(0) == two.charAt(2)){
-            ints[1]++;
-        }
-        if (one.charAt(1)==two.charAt(0) || one.charAt(1) == two.charAt(2)){
-            ints[1]++;
-        }
-        if (one.charAt(2)==two.charAt(1) || one.charAt(2) == two.charAt(0)){
-            ints[1]++;
+        if(x1==y2 || x1==y3){
+            ball--;
         }
 
-        return ints;
+        if(x2==y1 || x2 == y3){
+            ball--;
+        }
+
+        if(x3==y1 || x3 == y2){
+            ball--;
+        }
+
+        return strike==0 && ball ==0;
     }
 }
